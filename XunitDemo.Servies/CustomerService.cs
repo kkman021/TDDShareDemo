@@ -8,7 +8,7 @@
 
         public int Add(int firstNumber, int secondNumber)
         {
-            throw new System.NotImplementedException();
+            return firstNumber + secondNumber;
         }
     }
 }
