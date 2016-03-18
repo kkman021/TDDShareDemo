@@ -48,7 +48,6 @@ namespace XunitDemo.Services.Test
             //act
             var actual = targetService.GetCustomers(city);
 
-
             //assert
             Assert.Equal(expectedRecordCount, actual.Count);
         }

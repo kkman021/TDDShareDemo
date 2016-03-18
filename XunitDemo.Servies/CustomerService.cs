@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using XunitDemo.Entity;
 
 namespace XunitDemo.Services
 {
@@ -16,7 +18,11 @@ namespace XunitDemo.Services
 
         public List<Entity.Customer> GetCustomers(string city)
         {
-            throw new System.NotImplementedException();
+            var db = new NorthwindDbContext();
+
+            var customers = db.Customers.Where(x => x.City == city).ToList();
+
+            return customers;
         }
     }
 }
