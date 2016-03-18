@@ -73,6 +73,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\XunitDemo.Entity\XunitDemo.Entity.csproj">
+      <Project>{78cee638-38da-4325-93a4-c711545b5725}</Project>
+      <Name>XunitDemo.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XunitDemo.Servies\XunitDemo.Services.csproj">
       <Project>{26765620-1ee6-459e-8367-b4214f753127}</Project>
       <Name>XunitDemo.Services</Name>

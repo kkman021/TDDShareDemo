@@ -35,5 +35,22 @@ namespace XunitDemo.Services.Test
             //assert
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void Get_會員_城市在London_返回6筆資料()
+        {
+            //arrange
+            var targetService = new CustomerService();
+
+            var city = "London";
+            var expectedRecordCount = 6;
+
+            //act
+            var actual = targetService.GetCustomers(city);
+
+
+            //assert
+            Assert.Equal(expectedRecordCount, actual.Count);
+        }
     }
 }
