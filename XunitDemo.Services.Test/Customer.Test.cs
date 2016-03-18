@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ploeh.AutoFixture;
 using Xunit;
 using XunitDemo.Entity;
 
@@ -50,10 +51,9 @@ namespace XunitDemo.Services.Test
             var db = new FakeNorthwindDbContext();
             var targetService = new CustomerService(db);
 
-            //.....自己做假資料這樣幹，寫完都天黑了
-            //.....找出關鍵欄位，其餘讓套件處理（https://github.com/AutoFixture/AutoFixture）。
-            db.Customers.Add(new Entity.Customer() { CustomerId = "AROUT", CompanyName = "Around the Horn", ContactName = "Thomas Hardy", ContactTitle = "Sales Representative", Address = "120 Hanover Sq.", City = "London",  PostalCode = "WA1 1DP", Country = "UK", Phone = "(171) 555-7788", Fax = "(171) 555-6750" });
-            
+            db.Customers.AddRange(GetCustomers(6, "London"));
+            db.Customers.Add(GetCustomer("Graz"));
+
 
             var city = "London";
             var expectedRecordCount = 6;
@@ -64,5 +64,29 @@ namespace XunitDemo.Services.Test
             //assert
             Assert.Equal(expectedRecordCount, actual.Count);
         }
+
+        #region Private Function
+
+        private Entity.Customer GetCustomer(string city)
+        {
+            var fixture = new Fixture().Customize(new DoNotFillVirtualProperties());
+            var data = fixture.Build<Entity.Customer>()
+                   .With(x => x.City, city)
+                   .Create();
+
+            return data;
+        }
+
+        private IEnumerable<Entity.Customer> GetCustomers(int count, string city)
+        {
+            var fixture = new Fixture().Customize(new DoNotFillVirtualProperties());
+            var data = fixture.Build<Entity.Customer>()
+                   .With(x => x.City, city)
+                   .CreateMany(count);
+
+            return data;
+        }
+
+        #endregion
     }
 }
