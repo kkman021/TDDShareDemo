@@ -22,7 +22,7 @@ namespace XunitDemo.Services.Test
     {
         public Customer()
         {
-            
+
         }
 
         [Fact]
@@ -49,6 +49,11 @@ namespace XunitDemo.Services.Test
             //arrange
             var db = new FakeNorthwindDbContext();
             var targetService = new CustomerService(db);
+
+            //.....自己做假資料這樣幹，寫完都天黑了
+            //.....找出關鍵欄位，其餘讓套件處理（https://github.com/AutoFixture/AutoFixture）。
+            db.Customers.Add(new Entity.Customer() { CustomerId = "AROUT", CompanyName = "Around the Horn", ContactName = "Thomas Hardy", ContactTitle = "Sales Representative", Address = "120 Hanover Sq.", City = "London",  PostalCode = "WA1 1DP", Country = "UK", Phone = "(171) 555-7788", Fax = "(171) 555-6750" });
+            
 
             var city = "London";
             var expectedRecordCount = 6;
