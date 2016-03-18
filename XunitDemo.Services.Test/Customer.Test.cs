@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using XunitDemo.Entity;
 
 /*
 
@@ -19,11 +20,17 @@ namespace XunitDemo.Services.Test
 {
     public class Customer
     {
+        public Customer()
+        {
+            
+        }
+
         [Fact]
         public void Add_1加1等於2()
         {
             //arrange
-            var targetService = new CustomerService();
+            var db = new FakeNorthwindDbContext();
+            var targetService = new CustomerService(db);
 
             var firstNumber = 1;
             var secondNumber = 1;
@@ -40,7 +47,8 @@ namespace XunitDemo.Services.Test
         public void Get_會員_城市在London_返回6筆資料()
         {
             //arrange
-            var targetService = new CustomerService();
+            var db = new FakeNorthwindDbContext();
+            var targetService = new CustomerService(db);
 
             var city = "London";
             var expectedRecordCount = 6;

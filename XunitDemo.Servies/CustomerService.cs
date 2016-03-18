@@ -6,9 +6,11 @@ namespace XunitDemo.Services
 {
     public class CustomerService
     {
+        private readonly INorthwindDbContext _db;
         
-        public CustomerService()
+        public CustomerService(INorthwindDbContext db)
         {
+            this._db = db;
         }
 
         public int Add(int firstNumber, int secondNumber)
@@ -18,9 +20,7 @@ namespace XunitDemo.Services
 
         public List<Entity.Customer> GetCustomers(string city)
         {
-            var db = new NorthwindDbContext();
-
-            var customers = db.Customers.Where(x => x.City == city).ToList();
+            var customers = this._db.Customers.Where(x => x.City == city).ToList();
 
             return customers;
         }
