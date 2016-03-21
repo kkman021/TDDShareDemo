@@ -13,32 +13,34 @@ using Xunit;
 using XunitDemo.Entity;
 using XunitDemo.Services;
 using XunitDemo.Web.Controllers;
+using XUnitDemo.Web.Test.PagedObject;
 
 namespace XUnitDemo.Web.Test.Controllers
 {
     public class CustomerControllerTests : FluentTest, IDisposable
     {
-        private string baseURL;
+        private LoginPage _loginPage;
 
         public CustomerControllerTests()
         {
             SeleniumWebDriver.Bootstrap(SeleniumWebDriver.Browser.Chrome);
-            baseURL = "http://localhost:39765/";
+            this._loginPage = new LoginPage(this);
         }
 
         [Fact]
         public void Index_Login_Selenium_Fail()
         {
+            var accountName = "test";
+            var password = "12";
             var expectMsg = "帳號密碼異常";
 
-            I.Open(baseURL + "/Home/Login");
+            //.Go為FluentTest預設提供的方法，不需自己寫
+            _loginPage.Go();
 
-            I.Enter("test").In("#Account")
-             .Enter("245").In("#Pwd");
-
-            I.Click("input[type=\"submit\"]");
-
-            I.Assert.True(() => I.Find(".validation-summary-errors").Element.Text.Contains(expectMsg));
+            _loginPage.EnterAccount(accountName);
+            _loginPage.EnterPwd(password);
+            _loginPage.ClickLogin();
+            _loginPage.ShouldShowErrorMsg(expectMsg);
         }
     }
 }

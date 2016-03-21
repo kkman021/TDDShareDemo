@@ -134,6 +134,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Controllers\CustomerControllerTests.cs" />
+    <Compile Include="PagedObject\LoginPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
