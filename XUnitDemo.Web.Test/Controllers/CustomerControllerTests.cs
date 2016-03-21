@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Web.Mvc;
 using FluentAssertions;
 using NSubstitute;
 using NSubstitute.Core;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using Xunit;
 using XunitDemo.Entity;
 using XunitDemo.Services;
@@ -11,47 +15,37 @@ using XunitDemo.Web.Controllers;
 
 namespace XUnitDemo.Web.Test.Controllers
 {
-    public class CustomerControllerTests
+    public class CustomerControllerTests : IDisposable
     {
+        private IWebDriver driver;
+        private string baseURL;
 
-        [Fact()]
-        public void IndexTest()
+        public CustomerControllerTests()
         {
-            //arrange
-            var city = "";
-            var customerService = Substitute.For<ICustomerService>();
-            var expectErrorMsg = "請輸入居住地";
-
-            //act
-            var target = new CustomerController(customerService);
-            var actul = target.Index(city) as ViewResult;
-            var actulErrorMsg = actul.ViewBag.ErrorMsg as string;
-
-            //assert
-            actulErrorMsg.Should().Be(expectErrorMsg);
-            customerService.Received(0).GetCustomers(city);
+            driver = new ChromeDriver();
+            baseURL = "http://localhost:39765/";
         }
 
-        [Fact()]
-        public void IndexTest_city_Lodon_nodatereturn()
+        public void Index_Login_Selenium_Fail()
         {
-            //arrange
-            var city = "Lodon";
-            var customerService = Substitute.For<ICustomerService>();
+            driver.Navigate().GoToUrl(baseURL + "/Home/Login");
+            driver.FindElement(By.Id("Account")).Clear();
+            driver.FindElement(By.Id("Account")).SendKeys("test");
+            driver.FindElement(By.Id("Pwd")).Clear();
+            driver.FindElement(By.Id("Pwd")).SendKeys("245");
+            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
 
-            //模擬回傳的資料
-            customerService.GetCustomers(city).Returns(new List<Customer>());
+            var expectMsg = "帳號密碼異常";
+            var acturlMsg = driver
+                            .FindElement(By.CssSelector("div.validation-summary-errors > ul > li"))
+                            .Text;
 
-            var expectErrorMsg = "查無資料";
+            expectMsg.Should().Be(acturlMsg);
+        }
 
-            //act
-            var target = new CustomerController(customerService);
-            var actul = target.Index(city) as ViewResult;
-            var actulErrorMsg = actul.ViewBag.ErrorMsg as string;
-
-            //assert
-            actulErrorMsg.Should().Be(expectErrorMsg);
-            customerService.Received(1).GetCustomers(city);
+        public void Dispose()
+        {
+            driver.Quit();
         }
     }
 }

@@ -29,9 +29,7 @@ namespace XunitDemo.Web.Controllers
             model = _customerService.GetCustomers(city);
 
             if (model.Count == 0)
-            {
                 ViewBag.ErrorMsg = "查無資料";
-            }
 
             return View(model);
         }
