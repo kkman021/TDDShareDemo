@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XunitDemo.Services.Test", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitDemo.Web.Test", "XUnitDemo.Web.Test\XUnitDemo.Web.Test.csproj", "{87109374-5F20-4286-B064-1BED6DA6D343}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{2146017F-D9DA-4188-AB40-74A3C229BDA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XunitDemo.Web", "Presentation\XunitDemo.Web\XunitDemo.Web.csproj", "{9491518F-097D-4940-A026-E601AD73F33F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,10 @@ Global
 		{87109374-5F20-4286-B064-1BED6DA6D343}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87109374-5F20-4286-B064-1BED6DA6D343}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87109374-5F20-4286-B064-1BED6DA6D343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9491518F-097D-4940-A026-E601AD73F33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9491518F-097D-4940-A026-E601AD73F33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9491518F-097D-4940-A026-E601AD73F33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9491518F-097D-4940-A026-E601AD73F33F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,5 +62,6 @@ Global
 		{26765620-1EE6-459E-8367-B4214F753127} = {CB780FAA-EF74-4328-8C53-456EB65A6E1C}
 		{409989CA-4802-43FB-BBF5-AB18433D0DDF} = {CA97A3F7-F0E3-4AD1-9A9F-115E0DF89297}
 		{87109374-5F20-4286-B064-1BED6DA6D343} = {CA97A3F7-F0E3-4AD1-9A9F-115E0DF89297}
+		{9491518F-097D-4940-A026-E601AD73F33F} = {2146017F-D9DA-4188-AB40-74A3C229BDA5}
 	EndGlobalSection
 EndGlobal

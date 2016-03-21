@@ -34,7 +34,7 @@ namespace XunitDemo.Services.Test
             var db = new FakeNorthwindDbContext();
             var targetService = new CustomerService(db);
 
-            var firstNumber = 1;
+            var firstNumber = 31;
             var secondNumber = 1;
             var expected = 2;
 
@@ -42,6 +42,7 @@ namespace XunitDemo.Services.Test
             int actual = targetService.Add(firstNumber, secondNumber);
 
             //assert
+            Assert.Equal(expected, actual);
             expected.Should().Be(actual);
         }
 

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using XunitDemo.Entity;
 
 namespace XunitDemo.Services
 {
-    public class CustomerService
+    public class CustomerService : ICustomerService
     {
         private readonly INorthwindDbContext _db;
         
