@@ -23,11 +23,16 @@ namespace XunitDemo.Web.Controllers
             if (string.IsNullOrWhiteSpace(city))
             {
                 ViewBag.ErrorMsg = "請輸入居住地";
+                return View();
             }
-            else
+
+            model = _customerService.GetCustomers(city);
+
+            if (model.Count == 0)
             {
-                model = _customerService.GetCustomers(city);
+                ViewBag.ErrorMsg = "查無資料";
             }
+
             return View(model);
         }
     }
