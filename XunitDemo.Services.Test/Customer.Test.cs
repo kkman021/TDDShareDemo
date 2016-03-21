@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Ploeh.AutoFixture;
 using Xunit;
 using XunitDemo.Entity;
@@ -41,7 +42,7 @@ namespace XunitDemo.Services.Test
             int actual = targetService.Add(firstNumber, secondNumber);
 
             //assert
-            Assert.Equal(expected, actual);
+            expected.Should().Be(actual);
         }
 
         [Fact]
